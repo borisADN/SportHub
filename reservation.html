@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Réservation - SportHub</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.webp" type="image/png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-4.5.0.min.css">
+    
+    <!-- Flatpickr (Calendrier) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    
+    <header id="home" class="header">
+        <div class="navbar-area">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html" style="font-family: Diphylleia; font-size: 48px; color: #0ad222;">
+                        SportHub
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <br> <br> 
+
+    <!-- Section Réservation -->
+    <section id="reservation" class="container mt-5">
+        <div class="text-center">
+            <h2>Réservez votre terrain</h2>
+            <p>Choisissez une date, une heure et remplissez le formulaire pour réserver.</p>
+        </div>
+
+        <div class="row justify-content-center" style="height: 500px;">
+            <div class="col-md-6">
+                <form id="reservationForm">
+                    <div class="form-group">
+                        <label for="name">Nom et Prénom</label>
+                        <input type="text" class="form-control" id="name" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Numéro de téléphone</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Votre numéro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date et heure de réservation</label>
+                        <input type="text" class="form-control" id="date" placeholder="Sélectionnez une date" required>
+                        <small class="text-danger d-none" id="dateError">❌ Ce jour est déjà réservé. Veuillez en choisir un autre.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="sport">Type de sport</label>
+                        <select class="form-control" id="sport">
+                            <option>Football</option>
+                            <option>Basketball</option>
+                            <option>Tennis</option>
+                            <option>Volleyball</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Confirmer la réservation</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="confirmationMessage" class="alert alert-success text-center mt-3 d-none">
+            ✅ Votre réservation a été enregistrée avec succès !
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2025 SportHub. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Liste des dates déjà réservées (exemple)
+        const reservedDates = ["2025-02-20", "2025-02-22", "2025-02-25"]; 
+
+        // Configuration du calendrier interactif
+        flatpickr("#date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: "today",
+            time_24hr: true,
+            disable: reservedDates.map(date => ({
+                from: date,
+                to: date
+            })),
+            onChange: function(selectedDates, dateStr, instance) {
+                if (reservedDates.includes(dateStr.split(" ")[0])) {
+                    document.getElementById("dateError").classList.remove("d-none");
+                    instance.clear();
+                } else {
+                    document.getElementById("dateError").classList.add("d-none");
+                }
+            }
+        });
+
+        // Simulation de réservation
+        document.getElementById("reservationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("confirmationMessage").classList.remove("d-none");
+            setTimeout(() => {
+                document.getElementById("confirmationMessage").classList.add("d-none");
+                document.getElementById("reservationForm").reset();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

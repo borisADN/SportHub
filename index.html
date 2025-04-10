@@ -24,55 +24,44 @@
      <link rel="stylesheet" href="assets/css/main.css">
      <!-- Responsive Style -->
      <link rel="stylesheet" href="assets/css/responsive.css">
+     <!-- fontawesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     
-    <header id="home" class="header">
-        <div class="navbar-area">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <nav class="navbar navbar-expand-lg">
-                  <a class="navbar-brand" href="index.html" style="font-family: Diphylleia; font-size: 48px; color: #0ad222;">
+  <header id="home" class="header">
+    <div class="navbar-area">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="index.html" style="font-family: Diphylleia; font-size: 48px; color: #0ad222;">
                     SportHub
-                    <!-- <img src="assets/img/logo.png" alt="Logo"> -->
-                  </a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="toggler-icon"></span>
                     <span class="toggler-icon"></span>
                     <span class="toggler-icon"></span>
-                  </button>
-      
-                  <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                </button>
+
+                <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                     <ul id="nav" class="navbar-nav ml-auto">
-                      <li class="nav-item active">
-                        <a class="page-scroll" href="#">Accueil</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="page-scroll" href="./aboutUs.html">A Propos</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="page-scroll" href="./activities.html">Nos Activités</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="page-scroll" href="./Subscriptions.html">Abonnements</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="page-scroll" href="#testimonial">Reservation</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="page-scroll" href="#contact" style="background-color: #0ad222; color: #fff;padding: 10px 20px;border-radius: 20px;">Se Connecter</a>
-                      </li>
+                        <li class="nav-item active"><a class="page-scroll" href="#hero-area">Accueil</a></li>
+                        <li class="nav-item"><a class="page-scroll" href="#services">A Propos</a></li>
+                        <li class="nav-item"><a class="page-scroll" href="#team">Nos Activités</a></li>
+                        <li class="nav-item"><a class="page-scroll" href="#pricing">Abonnements</a></li>
+                        <li class="nav-item"><a class="page-scroll" href="#testimonial">Réservation</a></li>
+
+                        <!-- Bouton Connexion ou Utilisateur -->
+                        <li class="nav-item" id="authContainer">
+                            <a href="login.html" class="btn btn-success" id="loginButton">Se Connecter</a>
+                        </li>
                     </ul>
-                  </div> <!-- navbar collapse -->
-                </nav> <!-- navbar -->
-              </div>
-            </div> <!-- row -->
-          </div> <!-- container -->
-        </div> <!-- navbar area -->
-      
-    </header>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
 
       <!-- Hero Area Start -->
       <section id="hero-area" class="hero-area-bg">
@@ -706,5 +695,36 @@
        <script src="assets/js/contact-form-script.min.js"></script>
          
      <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"8fddf55f0f5002b5","version":"2024.10.5","r":1,"token":"9a6015d415bb4773a0bff22543062d3b","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+
+     <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const authContainer = document.getElementById("authContainer");
+  
+          // Vérifie si l'utilisateur est connecté (stocké dans localStorage)
+          const user = localStorage.getItem("user");
+  
+          if (user) {
+              // Remplace le bouton "Se connecter" par une icône utilisateur avec un dropdown
+              authContainer.innerHTML = `
+                  <div class="dropdown">
+                      <button class="btn btn-light dropdown-toggle" style="color : #0ad222" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-user-circle fa-2x"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                          <a class="dropdown-item" href="#" id="logoutButton">Se déconnecter</a>
+                      </div>
+                  </div>
+              `;
+  
+              // Déconnexion
+              document.getElementById("logoutButton").addEventListener("click", function() {
+                  localStorage.removeItem("user");
+                  window.location.reload(); // Recharge la page pour revenir à l'état non connecté
+              });
+          }
+      });
+  </script>
+  
+
 </body>
 </html>

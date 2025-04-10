@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Connexion - SportHub</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-4.5.0.min.css">
+    <!-- FontAwesome pour l'icône Google -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    
+    <header id="home" class="header">
+        <div class="navbar-area">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html" style="font-family: Diphylleia; font-size: 48px; color: #0ad222;">
+                        SportHub
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Connexion -->
+    <section id="connexion" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <h2 class="text-center">Connexion</h2>
+                <p class="text-center">Accédez à votre compte pour réserver un terrain.</p>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" placeholder="Votre mot de passe" required>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Se connecter</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>- OU -</p>
+                    <button class="btn btn-outline-danger btn-block" id="googleLogin" style="color: #d20a0a;">
+                        <i class="fab fa-google"></i> Se connecter avec Google
+                    </button>
+                </div>
+
+                <div class="alert alert-danger text-center mt-3 d-none" id="errorMessage">
+                    ❌ Email ou mot de passe incorrect !
+                </div>
+
+                <p class="text-center mt-3">Pas encore de compte ? <a href="signup.html">Inscrivez-vous</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2025 SportHub. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Simulation de connexion
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Vérification simple (simulation)
+            if (email === "user@sporthub.com" && password === "123456") {
+                alert("✅ Connexion réussie !");
+                window.location.href = "reservation.html"; // Redirection
+            } else {
+                document.getElementById("errorMessage").classList.remove("d-none");
+            }
+        });
+
+        // Simulation Connexion Google
+        document.getElementById("googleLogin").addEventListener("click", function() {
+            alert("✅ Connexion réussie avec Google !");
+            window.location.href = "reservation.html"; // Redirection simulée
+        });
+    </script>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (email === "user@sporthub.com" && password === "123456") {
+            localStorage.setItem("user", JSON.stringify({ email: email })); // Stocke l'utilisateur
+            alert("✅ Connexion réussie !");
+            window.location.href = "index.html"; // Redirige vers la page d'accueil
+        } else {
+            document.getElementById("errorMessage").classList.remove("d-none");
+        }
+    });
+
+    document.getElementById("googleLogin").addEventListener("click", function() {
+        localStorage.setItem("user", JSON.stringify({ email: "google_user@sporthub.com" }));
+        alert("✅ Connexion réussie avec Google !");
+        window.location.href = "index.html"; // Redirige vers la page d'accueil
+    });
+</script>
+
+</body>
+</html>
